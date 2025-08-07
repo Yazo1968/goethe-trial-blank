@@ -14,7 +14,272 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      chats: {
+        Row: {
+          created_at: string
+          id: string
+          is_archived: boolean
+          pdf_url: string | null
+          title_ar: string | null
+          title_en: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_archived?: boolean
+          pdf_url?: string | null
+          title_ar?: string | null
+          title_en?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_archived?: boolean
+          pdf_url?: string | null
+          title_ar?: string | null
+          title_en?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      message_references: {
+        Row: {
+          message_id: string
+          reference_id: string
+        }
+        Insert: {
+          message_id: string
+          reference_id: string
+        }
+        Update: {
+          message_id?: string
+          reference_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "message_references_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "messages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "message_references_reference_id_fkey"
+            columns: ["reference_id"]
+            isOneToOne: false
+            referencedRelation: "references"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      message_topics: {
+        Row: {
+          message_id: string
+          topic_id: string
+        }
+        Insert: {
+          message_id: string
+          topic_id: string
+        }
+        Update: {
+          message_id?: string
+          topic_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "message_topics_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "messages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "message_topics_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          chat_id: string
+          content_ar: string
+          created_at: string
+          follow_up_questions: Json | null
+          id: string
+          reply_length: string | null
+          role: string
+          thinking_block: string | null
+          token_count: number | null
+        }
+        Insert: {
+          chat_id: string
+          content_ar: string
+          created_at?: string
+          follow_up_questions?: Json | null
+          id?: string
+          reply_length?: string | null
+          role: string
+          thinking_block?: string | null
+          token_count?: number | null
+        }
+        Update: {
+          chat_id?: string
+          content_ar?: string
+          created_at?: string
+          follow_up_questions?: Json | null
+          id?: string
+          reply_length?: string | null
+          role?: string
+          thinking_block?: string | null
+          token_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_chat_id_fkey"
+            columns: ["chat_id"]
+            isOneToOne: false
+            referencedRelation: "chats"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      references: {
+        Row: {
+          author: string | null
+          category: string
+          created_at: string
+          format: string | null
+          id: string
+          language: string | null
+          source_type: string | null
+          subject_focus: string | null
+          title: string
+          url: string | null
+          year: number | null
+        }
+        Insert: {
+          author?: string | null
+          category: string
+          created_at?: string
+          format?: string | null
+          id?: string
+          language?: string | null
+          source_type?: string | null
+          subject_focus?: string | null
+          title: string
+          url?: string | null
+          year?: number | null
+        }
+        Update: {
+          author?: string | null
+          category?: string
+          created_at?: string
+          format?: string | null
+          id?: string
+          language?: string | null
+          source_type?: string | null
+          subject_focus?: string | null
+          title?: string
+          url?: string | null
+          year?: number | null
+        }
+        Relationships: []
+      }
+      topics: {
+        Row: {
+          category: string | null
+          created_at: string
+          description_ar: string | null
+          description_en: string | null
+          id: string
+          name_ar: string
+          name_en: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description_ar?: string | null
+          description_en?: string | null
+          id?: string
+          name_ar: string
+          name_en: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description_ar?: string | null
+          description_en?: string | null
+          id?: string
+          name_ar?: string
+          name_en?: string
+        }
+        Relationships: []
+      }
+      user_preferences: {
+        Row: {
+          created_at: string
+          id: string
+          language: string
+          settings: Json | null
+          theme: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          language?: string
+          settings?: Json | null
+          theme?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          language?: string
+          settings?: Json | null
+          theme?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
