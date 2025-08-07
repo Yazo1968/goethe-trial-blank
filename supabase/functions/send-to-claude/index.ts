@@ -126,7 +126,7 @@ Remember to adhere strictly to the information provided in the references and do
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-3-sonnet-20240229',
+        model: 'claude-3-5-sonnet-20241022',
         max_tokens: 64000,
         temperature: 0.1,
         messages: [
@@ -177,6 +177,7 @@ Remember to adhere strictly to the information provided in the references and do
       }
     )
   } catch (error) {
+    console.error('Error in send-to-claude function:', error)
     return new Response(
       JSON.stringify({ error: error.message }),
       {

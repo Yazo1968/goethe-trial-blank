@@ -1,4 +1,4 @@
-import { User } from '@supabase/supabase-js'
+import type { User } from '@supabase/supabase-js'
 import { Globe, Moon, Sun, LogOut, User as UserIcon } from 'lucide-react'
 
 interface HeaderProps {
